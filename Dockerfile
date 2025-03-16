@@ -1,17 +1,17 @@
-FROM alpine:3.12 as buildbase
+FROM alpine:latest AS buildbase
 
 # install all the stuff we need to build
 RUN apk --no-cache --update add wget curl git make gcc musl-dev ncurses-dev zip; \
   rm -rf /var/cache/apk/*;
 
-ARG GIT_CHECKOUT=2.52
+ARG GIT_CHECKOUT=2.55
 WORKDIR /tmp
 RUN git clone https://gitlab.com/DavidGriffith/frotz; cd frotz; git checkout ${GIT_CHECKOUT}
 RUN cd frotz && make nosound && mv frotz /usr/local/bin
 
 # clean up
-#RUN rm -rf /tmp/frotz; \
-#    apk del wget curl git make gcc musl-dev zip
+RUN rm -rf /tmp/frotz; \
+    apk del wget curl git make gcc musl-dev zip
 
 FROM alpine:latest
 #COPY --from=0 /usr/lib /usr/lib
@@ -41,4 +41,4 @@ WORKDIR /home/frotz
 # add zfiles from local filesystem so they're easily accessible
 ADD zfiles .
 
-CMD ash
+CMD ["ash"]

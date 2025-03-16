@@ -19,10 +19,16 @@ frotz telling.z5
 
 # Building
 
+Linux
 ```
-GIT_CHECKOUT=2.52 && \
-    docker build -t newtmitch/frotz --build-arg GIT_CHECKOUT . && \
-    docker tag newtmitch/frotz newtmitch/frotz:$GIT_CHECKOUT
+GIT_CHECKOUT=2.55 && \
+    docker build -t rfriedgh/frotz --build-arg GIT_CHECKOUT . && \
+    docker tag rfriedgh/frotz rfriedgh/frotz:$GIT_CHECKOUT
+```
+
+Windows
+```
+set GIT_CHECKOUT=2.55 && docker build -t rfriedgh/frotz --build-arg GIT_CHECKOUT . && docker tag rfriedgh/frotz rfriedgh/frotz:%GIT_CHECKOUT%
 ```
 
 # Change Log
